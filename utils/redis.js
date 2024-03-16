@@ -28,36 +28,22 @@ class RedisClient {
   }
 
   // Method to set a value in Redis for a given key with expiration
-  async set(key, value, duration) {
-    return new Promise((resolve, reject) => {
-      // Set the value in Redis with expiration
-      this.client.setex(key, duration, value, (error, result) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(result);
-        }
-      });
-    });
-  }
+  async get(key) {
+        return new Promise((resolve, reject) => {
+            this.client.get(key, (error, result) => {
+                if (error) {
+                    console.error('Error getting value from Redis:', error);
+                    resolve(null);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    }
 
-  // Method to delete a value from Redis for a given key
-  async del(key) {
-    return new Promise((resolve, reject) => {
-      // Delete the value from Redis for the key
-      this.client.del(key, (error, result) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(result);
-        }
-      });
-    });
-  }
+    // Implement other methods like 'set', 'del', etc.
 }
 
-// Create an instance of RedisClient
 const redisClient = new RedisClient();
 
-// Export the redisClient instance
 export default redisClient;
