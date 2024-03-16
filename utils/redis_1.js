@@ -1,12 +1,12 @@
 // Import the required Redis client library
-import redis from 'redis';
+const redis = require('redis');
 
 // Define the RedisClient class
 class RedisClient {
   constructor() {
     // Create a new Redis client instance
     this.client = redis.createClient();
-
+    
     // Add event listener for error handling
     this.client.on('error', (error) => {
       console.error('Error connecting to Redis:', error);
@@ -66,4 +66,4 @@ class RedisClient {
 const redisClient = new RedisClient();
 
 // Export the redisClient instance
-export default redisClient;
+module.exports = redisClient;
