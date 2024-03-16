@@ -1,14 +1,13 @@
-import express from 'express';
-import controllerRouting from './routes/index';
+// Import required modules
+const express = require('express');
+const AppController = require('../controllers/AppController');
 
-const app = express();
-const port = process.env.PORT || 5000;
+// Create a router instance
+const router = express.Router();
 
-app.use(express.json());
-controllerRouting(app);
+// Define routes
+router.get('/status', AppController.getStatus);
+router.get('/stats', AppController.getStats);
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
-export default app;
+// Export the router
+module.exports = router;
